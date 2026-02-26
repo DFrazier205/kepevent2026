@@ -16,769 +16,176 @@
     --charcoal: #1A1A1A;
     --slate: #2C2C2C;
     --muted: #7A7A7A;
-    --cream: #FAF6EE;
     --white: #FFFFFF;
-    --accent: #8B6914;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
+  body { font-family: 'Montserrat', sans-serif; background: var(--midnight); color: var(--champagne); overflow-x: hidden; }
 
-  body {
-    font-family: 'Montserrat', sans-serif;
-    background: var(--midnight);
-    color: var(--champagne);
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
+  /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
     padding: 1.4rem 4rem;
     transition: background 0.5s ease, backdrop-filter 0.5s ease;
   }
-  nav.scrolled {
-    background: rgba(13,13,13,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(184,150,90,0.2);
-  }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    color: var(--warm-gold);
-    text-decoration: none;
-  }
+  nav.scrolled { background: rgba(13,13,13,0.93); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(184,150,90,0.2); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; letter-spacing: 0.08em; color: var(--warm-gold); text-decoration: none; }
   .nav-logo span { font-weight: 300; color: var(--champagne); }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--champagne);
-    text-decoration: none;
-    opacity: 0.75;
-    transition: opacity 0.3s, color 0.3s;
-  }
+  .nav-links a { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--champagne); text-decoration: none; opacity: 0.75; transition: opacity 0.3s, color 0.3s; }
   .nav-links a:hover { opacity: 1; color: var(--warm-gold); }
-  .nav-cta {
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 0.65rem 1.8rem;
-    border: 1px solid var(--deep-gold);
-    color: var(--warm-gold);
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.35s ease;
-    text-decoration: none;
-  }
+  .nav-cta { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.65rem 1.8rem; border: 1px solid var(--deep-gold); color: var(--warm-gold); background: transparent; cursor: pointer; transition: all 0.35s ease; text-decoration: none; }
   .nav-cta:hover { background: var(--deep-gold); color: var(--midnight); }
 
-  /* ── HERO ── */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(135deg, rgba(13,13,13,0.97) 0%, rgba(26,26,26,0.88) 50%, rgba(13,13,13,0.96) 100%);
-    z-index: 1;
-  }
-  .hero-texture {
-    position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(184,150,90,0.08) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(184,150,90,0.05) 0%, transparent 60%);
-    z-index: 2;
-  }
-  .hero-lines {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    overflow: hidden;
-  }
-  .hero-lines::before {
-    content: '';
-    position: absolute;
-    top: 15%; right: 8%;
-    width: 1px; height: 55%;
-    background: linear-gradient(to bottom, transparent, rgba(184,150,90,0.4), transparent);
-    animation: lineGlow 3s ease-in-out infinite alternate;
-  }
-  .hero-lines::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 5%;
-    width: 45%; height: 1px;
-    background: linear-gradient(to right, transparent, rgba(184,150,90,0.25), transparent);
-  }
-  @keyframes lineGlow {
-    from { opacity: 0.4; }
-    to { opacity: 1; }
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 3;
-    padding: 0 4rem;
-    max-width: 900px;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: heroReveal 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s forwards;
-  }
-  @keyframes heroReveal {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: block;
-    width: 50px; height: 1px;
-    background: var(--deep-gold);
-  }
-  .hero-eyebrow span {
-    font-size: 0.68rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--deep-gold);
-    font-weight: 600;
-  }
-
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.5rem, 8vw, 7rem);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    color: var(--white);
-    margin-bottom: 0.3rem;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--warm-gold);
-  }
-
-  .hero-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
-    font-weight: 300;
-    font-style: italic;
-    color: rgba(245,236,215,0.65);
-    margin: 1.5rem 0 2.5rem;
-    max-width: 560px;
-    line-height: 1.7;
-  }
-
-  .hero-meta {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 3rem;
-  }
+  /* HERO */
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+  .hero-photo { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1800&auto=format&fit=crop&q=85'); background-size: cover; background-position: center; z-index: 0; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(120deg, rgba(13,13,13,0.93) 0%, rgba(13,13,13,0.72) 55%, rgba(13,13,13,0.85) 100%); z-index: 1; }
+  .hero-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 55% at 70% 50%, rgba(184,150,90,0.08) 0%, transparent 70%); z-index: 2; }
+  .hero-line-v { position: absolute; top: 12%; right: 8%; width: 1px; height: 58%; background: linear-gradient(to bottom, transparent, rgba(184,150,90,0.45), transparent); animation: lineGlow 3s ease-in-out infinite alternate; z-index: 2; }
+  .hero-line-h { position: absolute; top: 50%; left: 4%; width: 44%; height: 1px; background: linear-gradient(to right, transparent, rgba(184,150,90,0.2), transparent); z-index: 2; }
+  @keyframes lineGlow { from { opacity: 0.4; } to { opacity: 1; } }
+  .hero-content { position: relative; z-index: 3; padding: 0 4rem; max-width: 900px; opacity: 0; transform: translateY(30px); animation: heroReveal 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s forwards; }
+  @keyframes heroReveal { to { opacity: 1; transform: translateY(0); } }
+  .hero-eyebrow { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+  .hero-eyebrow::before { content: ''; display: block; width: 50px; height: 1px; background: var(--deep-gold); }
+  .hero-eyebrow span { font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--deep-gold); font-weight: 600; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 0.3rem; }
+  .hero h1 em { font-style: italic; color: var(--warm-gold); }
+  .hero-sub { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 300; font-style: italic; color: rgba(245,236,215,0.65); margin: 1.5rem 0 2.5rem; max-width: 560px; line-height: 1.7; }
+  .hero-meta { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; }
   .hero-meta span { color: var(--deep-gold); margin: 0 0.5rem; }
-
   .hero-actions { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .btn-primary {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 1.1rem 3rem;
-    background: var(--deep-gold);
-    color: var(--midnight);
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.35s ease;
-    display: inline-block;
-  }
+  .hero-scroll { position: absolute; bottom: 3rem; left: 4rem; z-index: 3; display: flex; align-items: center; gap: 1rem; opacity: 0; animation: heroReveal 1s ease 1.5s forwards; }
+  .scroll-line { width: 40px; height: 1px; background: var(--deep-gold); animation: scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100% { width: 40px; } 50% { width: 70px; } }
+  .hero-scroll span { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+
+  /* BUTTONS */
+  .btn-primary { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 1.1rem 3rem; background: var(--deep-gold); color: var(--midnight); border: none; cursor: pointer; text-decoration: none; font-weight: 600; transition: all 0.35s ease; display: inline-block; }
   .btn-primary:hover { background: var(--warm-gold); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(184,150,90,0.3); }
-  .btn-ghost {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 1.1rem 3rem;
-    background: transparent;
-    color: var(--champagne);
-    border: 1px solid rgba(245,236,215,0.3);
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: 400;
-    transition: all 0.35s ease;
-    display: inline-block;
-  }
+  .btn-ghost { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 1.1rem 3rem; background: transparent; color: var(--champagne); border: 1px solid rgba(245,236,215,0.3); cursor: pointer; text-decoration: none; font-weight: 400; transition: all 0.35s ease; display: inline-block; }
   .btn-ghost:hover { border-color: var(--warm-gold); color: var(--warm-gold); transform: translateY(-2px); }
 
-  .hero-scroll {
-    position: absolute;
-    bottom: 3rem; left: 4rem;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    opacity: 0;
-    animation: heroReveal 1s ease 1.5s forwards;
-  }
-  .scroll-line {
-    width: 40px; height: 1px;
-    background: var(--deep-gold);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
-  @keyframes scrollPulse {
-    0%,100% { width: 40px; }
-    50% { width: 70px; }
-  }
-  .hero-scroll span {
-    font-size: 0.62rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
+  /* DIVIDER */
+  .gold-divider { height: 1px; background: linear-gradient(to right, transparent, var(--deep-gold), transparent); margin: 0 4rem; opacity: 0.4; }
 
-  /* ── SECTION BASE ── */
+  /* SECTION BASE */
   section { padding: 7rem 4rem; }
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 35px; height: 1px;
-    background: var(--deep-gold);
-  }
-  .section-label span {
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--deep-gold);
-    font-weight: 600;
-  }
-  .section-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--white);
-  }
+  .section-label { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+  .section-label::before { content: ''; display: block; width: 35px; height: 1px; background: var(--deep-gold); }
+  .section-label span { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--deep-gold); font-weight: 600; }
+  .section-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.15; color: var(--white); }
   .section-heading em { font-style: italic; color: var(--warm-gold); }
 
-  /* ── ABOUT ── */
-  .about {
-    background: var(--charcoal);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-  }
-  .about-visual {
-    position: relative;
-  }
-  .about-frame {
-    width: 100%;
-    aspect-ratio: 4/5;
-    background: linear-gradient(145deg, var(--slate) 0%, #111 100%);
-    border: 1px solid rgba(184,150,90,0.2);
-    position: relative;
-    overflow: hidden;
-  }
-  .about-frame::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 70% 50% at 30% 60%, rgba(184,150,90,0.12) 0%, transparent 70%);
-  }
-  .about-frame-inner {
-    position: absolute;
-    inset: 2rem;
-    border: 1px solid rgba(184,150,90,0.12);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 2rem;
-  }
-  .monogram {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -55%);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 9rem;
-    font-weight: 300;
-    color: rgba(184,150,90,0.1);
-    letter-spacing: -0.05em;
-    line-height: 1;
-    user-select: none;
-  }
-  .about-frame-badge {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--deep-gold);
-  }
-  .about-frame-year {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: rgba(245,236,215,0.5);
-    margin-top: 0.25rem;
-  }
-  .about-corner {
-    position: absolute;
-    width: 30px; height: 30px;
-    border-color: var(--deep-gold);
-    border-style: solid;
-    opacity: 0.5;
-  }
+  /* ABOUT */
+  .about { background: var(--charcoal); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .about-visual { position: relative; }
+  .about-frame { width: 100%; aspect-ratio: 4/5; border: 1px solid rgba(184,150,90,0.25); position: relative; overflow: hidden; }
+  .about-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-frame-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,13,13,0.65) 0%, transparent 55%); }
+  .about-frame-inner { position: absolute; inset: 1.8rem; border: 1px solid rgba(184,150,90,0.2); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; pointer-events: none; }
+  .about-frame-badge { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--deep-gold); }
+  .about-frame-year { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 300; color: rgba(245,236,215,0.65); margin-top: 0.25rem; }
+  .about-corner { position: absolute; width: 28px; height: 28px; border-color: var(--deep-gold); border-style: solid; opacity: 0.6; }
   .about-corner.tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
   .about-corner.br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+  .about-content p { font-size: 0.92rem; line-height: 1.9; color: rgba(245,236,215,0.7); margin-bottom: 1.5rem; font-weight: 300; }
 
-  .about-content p {
-    font-size: 0.92rem;
-    line-height: 1.9;
-    color: rgba(245,236,215,0.7);
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-  }
-  .about-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border: 1px solid rgba(184,150,90,0.2);
-    margin-top: 3rem;
-  }
-  .stat {
-    padding: 1.5rem;
-    border-right: 1px solid rgba(184,150,90,0.2);
-    text-align: center;
-  }
-  .stat:last-child { border-right: none; }
-  .stat-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
-    font-weight: 300;
-    color: var(--warm-gold);
-    display: block;
-  }
-  .stat-label {
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: block;
-    margin-top: 0.3rem;
-  }
+  /* PHOTO STRIP */
+  .photo-strip { display: grid; grid-template-columns: repeat(4, 1fr); height: 320px; overflow: hidden; }
+  .photo-strip-item { position: relative; overflow: hidden; }
+  .photo-strip-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+  .photo-strip-item:hover img { transform: scale(1.06); }
+  .photo-strip-overlay { position: absolute; inset: 0; background: rgba(13,13,13,0.38); transition: background 0.4s ease; }
+  .photo-strip-item:hover .photo-strip-overlay { background: rgba(13,13,13,0.18); }
+  .photo-strip-label { position: absolute; bottom: 1.2rem; left: 1.4rem; font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,236,215,0.85); }
 
-  /* ── SERVICES ── */
-  .services {
-    background: var(--midnight);
-  }
-  .services-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 4rem;
-  }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: rgba(184,150,90,0.15);
-  }
-  .service-card {
-    background: var(--midnight);
-    padding: 3rem 2.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.4s ease;
-    cursor: default;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--deep-gold);
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-    transform-origin: left;
-  }
+  /* SERVICES */
+  .services { background: var(--midnight); }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+  .services-header-desc { max-width: 340px; font-size: 0.82rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(184,150,90,0.15); }
+  .service-card { background: var(--midnight); padding: 3rem 2.5rem; position: relative; overflow: hidden; transition: background 0.4s ease; cursor: default; }
+  .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--deep-gold); transform: scaleX(0); transition: transform 0.4s ease; transform-origin: left; }
   .service-card:hover { background: var(--charcoal); }
-  .service-card:hover::before { transform: scaleX(1); }
-  .service-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 4rem;
-    font-weight: 300;
-    color: rgba(184,150,90,0.12);
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    transition: color 0.4s ease;
-  }
-  .service-card:hover .service-number { color: rgba(184,150,90,0.25); }
-  .service-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--white);
-    margin-bottom: 1rem;
-    line-height: 1.3;
-  }
-  .service-desc {
-    font-size: 0.8rem;
-    line-height: 1.8;
-    color: var(--muted);
-    font-weight: 300;
-  }
-  .service-icon {
-    position: absolute;
-    top: 2rem; right: 2rem;
-    width: 32px; height: 32px;
-    opacity: 0.25;
-    transition: opacity 0.4s ease;
-  }
-  .service-card:hover .service-icon { opacity: 0.6; }
-  .service-icon svg { width: 100%; height: 100%; stroke: var(--warm-gold); fill: none; stroke-width: 1; }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-number { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: rgba(184,150,90,0.12); line-height: 1; margin-bottom: 1.5rem; transition: color 0.4s ease; }
+  .service-card:hover .service-number { color: rgba(184,150,90,0.28); }
+  .service-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--white); margin-bottom: 1rem; line-height: 1.3; }
+  .service-desc { font-size: 0.8rem; line-height: 1.8; color: var(--muted); font-weight: 300; }
+  .service-icon { position: absolute; top: 2rem; right: 2rem; width: 30px; height: 30px; opacity: 0.22; transition: opacity 0.4s ease; }
+  .service-card:hover .service-icon { opacity: 0.55; }
+  .service-icon svg { width: 100%; height: 100%; stroke: var(--warm-gold); fill: none; stroke-width: 1.2; }
 
-  /* ── BARTENDER SECTION ── */
-  .bartender {
-    background: var(--charcoal);
-    padding: 0;
-    overflow: hidden;
-  }
-  .bartender-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 600px;
-  }
-  .bartender-visual {
-    position: relative;
-    background: var(--midnight);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 500px;
-  }
-  .bartender-bg-pattern {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(184,150,90,0.1) 0%, transparent 70%);
-  }
-  .glass-art {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-  }
-  .glass-art svg {
-    width: 180px;
-    height: 220px;
-    opacity: 0.6;
-  }
-  .glass-glow {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 250px; height: 250px;
-    background: radial-gradient(circle, rgba(184,150,90,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: glowPulse 3s ease-in-out infinite;
-  }
-  @keyframes glowPulse {
-    0%,100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-    50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
-  }
-  .bartender-content {
-    padding: 5rem 4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  /* BARTENDER */
+  .bartender { background: var(--charcoal); padding: 0; overflow: hidden; }
+  .bartender-inner { display: grid; grid-template-columns: 1fr 1fr; min-height: 700px; }
+  .bartender-visual { position: relative; overflow: hidden; min-height: 600px; }
+  .bartender-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bartender-vis-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(13,13,13,0.32) 0%, rgba(13,13,13,0.06) 100%); z-index: 1; }
+  .bartender-caption { position: absolute; bottom: 2.5rem; left: 2.5rem; z-index: 2; }
+  .bartender-caption .eyebrow { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--deep-gold); margin-bottom: 0.4rem; }
+  .bartender-caption .tagline { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: rgba(255,255,255,0.88); line-height: 1.2; }
+  .bartender-caption .tagline em { font-style: italic; }
+  .bartender-content { padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
   .bartender-content .section-heading { margin-bottom: 1.5rem; }
-  .bartender-content p {
-    font-size: 0.88rem;
-    line-height: 1.9;
-    color: rgba(245,236,215,0.65);
-    margin-bottom: 2rem;
-    font-weight: 300;
-  }
-  .cert-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    margin: 2rem 0;
-  }
-  .cert-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 0.78rem;
-    color: rgba(245,236,215,0.7);
-    letter-spacing: 0.05em;
-  }
-  .cert-item::before {
-    content: '';
-    display: block;
-    width: 6px; height: 6px;
-    background: var(--deep-gold);
-    transform: rotate(45deg);
-    flex-shrink: 0;
-  }
-  .venues-note {
-    margin: 1.5rem 0;
-    padding: 1rem 1.5rem;
-    border-left: 2px solid var(--deep-gold);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-style: italic;
-    color: rgba(245,236,215,0.5);
-  }
+  .bartender-content > p { font-size: 0.88rem; line-height: 1.9; color: rgba(245,236,215,0.65); margin-bottom: 1.5rem; font-weight: 300; }
+  .venues-note { margin: 0.5rem 0 1.8rem; padding: 1.1rem 1.5rem; border-left: 2px solid var(--deep-gold); font-family: 'Cormorant Garamond', serif; font-size: 1.02rem; font-style: italic; color: rgba(245,236,215,0.55); line-height: 1.65; }
+  .list-heading { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--deep-gold); font-weight: 600; margin-bottom: 1rem; margin-top: 0.5rem; }
+  .diamond-list { display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.8rem; }
+  .diamond-item { display: flex; align-items: center; gap: 1rem; font-size: 0.82rem; color: rgba(245,236,215,0.75); letter-spacing: 0.04em; }
+  .diamond-item::before { content: ''; display: block; width: 6px; height: 6px; background: var(--deep-gold); transform: rotate(45deg); flex-shrink: 0; }
+  .bartender-closing { font-size: 0.82rem; line-height: 1.85; color: rgba(245,236,215,0.5); font-weight: 300; margin-bottom: 1.8rem; }
+  .italic-tagline { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: rgba(245,236,215,0.45); margin-bottom: 1.8rem; }
 
-  /* ── CREDENTIALS ── */
-  .credentials {
-    background: var(--midnight);
-    text-align: center;
-  }
-  .credentials-intro {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    font-weight: 300;
-    font-style: italic;
-    color: rgba(245,236,215,0.5);
-    max-width: 600px;
-    margin: 1.5rem auto 4rem;
-    line-height: 1.7;
-  }
-  .creds-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    max-width: 900px;
-    margin: 0 auto 5rem;
-  }
-  .cred-card {
-    border: 1px solid rgba(184,150,90,0.25);
-    padding: 2rem 1.5rem;
-    transition: border-color 0.3s, transform 0.3s;
-  }
+  /* CREDENTIALS */
+  .credentials { background: var(--midnight); text-align: center; }
+  .credentials-intro { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300; font-style: italic; color: rgba(245,236,215,0.5); max-width: 600px; margin: 1.5rem auto 4rem; line-height: 1.7; }
+  .creds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 920px; margin: 0 auto; }
+  .cred-card { border: 1px solid rgba(184,150,90,0.25); padding: 2rem 1.5rem; transition: border-color 0.3s, transform 0.3s; }
   .cred-card:hover { border-color: var(--deep-gold); transform: translateY(-4px); }
-  .cred-icon {
-    width: 40px; height: 40px;
-    margin: 0 auto 1rem;
-    opacity: 0.6;
-  }
+  .cred-icon { width: 38px; height: 38px; margin: 0 auto 1rem; opacity: 0.55; }
   .cred-icon svg { width: 100%; height: 100%; stroke: var(--warm-gold); fill: none; stroke-width: 1.2; }
-  .cred-name {
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(245,236,215,0.7);
-    line-height: 1.5;
-  }
+  .cred-name { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,236,215,0.7); line-height: 1.55; }
 
-  .edu-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .edu-card {
-    background: var(--charcoal);
-    border: 1px solid rgba(184,150,90,0.15);
-    padding: 2rem;
-    text-align: left;
-  }
-  .edu-degree {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--warm-gold);
-    margin-bottom: 0.5rem;
-  }
-  .edu-school {
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* ── PARTNERS ── */
-  .partners {
-    background: var(--charcoal);
-    text-align: center;
-    padding: 5rem 4rem;
-  }
-  .partners-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 3rem;
-  }
-  .partners-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4rem;
-    flex-wrap: wrap;
-  }
-  .partner-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 300;
-    color: rgba(245,236,215,0.3);
-    letter-spacing: 0.08em;
-    transition: color 0.3s;
-  }
+  /* LEGACY PARTNERS */
+  .partners { background: var(--charcoal); text-align: center; padding: 5rem 4rem; }
+  .partners-label { font-size: 0.63rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; }
+  .partners-row { display: flex; justify-content: center; align-items: center; gap: 4rem; flex-wrap: wrap; }
+  .partner-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; color: rgba(245,236,215,0.28); letter-spacing: 0.08em; transition: color 0.3s; }
   .partner-name:hover { color: rgba(245,236,215,0.7); }
 
-  /* ── CTA SECTION ── */
-  .cta-section {
-    background: var(--midnight);
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-    padding: 9rem 4rem;
-  }
-  .cta-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(184,150,90,0.07) 0%, transparent 70%);
-  }
-  .cta-large {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 300;
-    line-height: 1.2;
-    color: var(--white);
-    position: relative;
-    z-index: 1;
-    margin-bottom: 1.5rem;
-  }
+  /* CTA */
+  .cta-section { position: relative; overflow: hidden; text-align: center; padding: 9rem 4rem; background-color: var(--midnight); background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1600&auto=format&fit=crop&q=70'); background-size: cover; background-position: center; }
+  .cta-overlay { position: absolute; inset: 0; background: rgba(8,8,8,0.87); z-index: 0; }
+  .cta-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(184,150,90,0.07) 0%, transparent 70%); z-index: 0; }
+  .cta-section > * { position: relative; z-index: 1; }
+  .cta-large { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 300; line-height: 1.2; color: var(--white); margin-bottom: 1.5rem; }
   .cta-large em { font-style: italic; color: var(--warm-gold); }
-  .cta-sub {
-    font-size: 0.85rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    margin-bottom: 3.5rem;
-    position: relative;
-    z-index: 1;
-    font-weight: 300;
-  }
-  .cta-actions {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-  }
-  .contact-row {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin-top: 4rem;
-    position: relative;
-    z-index: 1;
-    flex-wrap: wrap;
-  }
-  .contact-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-  .contact-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--deep-gold);
-  }
-  .contact-value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: rgba(245,236,215,0.7);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
+  .cta-sub { font-size: 0.85rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 3.5rem; font-weight: 300; }
+  .cta-actions { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+  .contact-row { display: flex; justify-content: center; gap: 3.5rem; margin-top: 4rem; flex-wrap: wrap; }
+  .contact-item { display: flex; flex-direction: column; gap: 0.3rem; }
+  .contact-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--deep-gold); }
+  .contact-value { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; color: rgba(245,236,215,0.7); text-decoration: none; transition: color 0.3s; }
   .contact-value:hover { color: var(--warm-gold); }
 
-  /* ── FOOTER ── */
-  footer {
-    background: #080808;
-    border-top: 1px solid rgba(184,150,90,0.15);
-    padding: 3rem 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-  }
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 500;
-    color: var(--warm-gold);
-  }
-  .footer-copy {
-    font-size: 0.68rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
-  .footer-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.9rem;
-    font-style: italic;
-    color: rgba(245,236,215,0.3);
-  }
+  /* FOOTER */
+  footer { background: #060606; border-top: 1px solid rgba(184,150,90,0.15); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; color: var(--warm-gold); }
+  .footer-tagline { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; font-style: italic; color: rgba(245,236,215,0.28); }
+  .footer-copy { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; }
 
-  /* ── DIVIDER ── */
-  .gold-divider {
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--deep-gold), transparent);
-    margin: 0 4rem;
-    opacity: 0.4;
-  }
-
-  /* ── SCROLL REVEAL ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(25px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.15s; }
   .reveal-delay-2 { transition-delay: 0.3s; }
   .reveal-delay-3 { transition-delay: 0.45s; }
 
-  /* ── RESPONSIVE ── */
+  /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 1.2rem 2rem; }
     .nav-links { display: none; }
@@ -786,12 +193,13 @@
     .about { grid-template-columns: 1fr; gap: 3rem; }
     .about-visual { display: none; }
     .services-grid { grid-template-columns: 1fr; }
+    .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .photo-strip { grid-template-columns: repeat(2, 1fr); height: auto; }
+    .photo-strip-item { height: 200px; }
     .bartender-inner { grid-template-columns: 1fr; }
-    .bartender-visual { min-height: 300px; }
+    .bartender-visual { min-height: 360px; }
     .bartender-content { padding: 3rem 2rem; }
     .creds-grid { grid-template-columns: repeat(2, 1fr); }
-    .edu-section { grid-template-columns: 1fr; }
-    .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     .partners-row { gap: 2rem; }
     .gold-divider { margin: 0 2rem; }
     footer { flex-direction: column; align-items: flex-start; padding: 2.5rem 2rem; }
@@ -799,7 +207,6 @@
     .hero-scroll { left: 2rem; }
     .cta-section { padding: 6rem 2rem; }
     .contact-row { gap: 2rem; }
-    .about-stats { grid-template-columns: repeat(3, 1fr); }
   }
 </style>
 </head>
@@ -819,16 +226,16 @@
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-texture"></div>
-  <div class="hero-lines"></div>
+  <div class="hero-photo"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-line-v"></div>
+  <div class="hero-line-h"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">
-      <span>Washington Metropolitan Area</span>
-    </div>
+    <div class="hero-eyebrow"><span>Washington Metropolitan Area</span></div>
     <h1>Where Every<br>Detail Becomes<br><em>Extraordinary</em></h1>
-    <p class="hero-sub">Full-service catering & event planning for clients who expect precision, creativity, and flawless execution.</p>
-    <p class="hero-meta">Founded 2017 <span>·</span> Bowie, Maryland <span>·</span> Corporate <span>·</span> Government <span>·</span> Private Events</p>
+    <p class="hero-sub">Full-service catering &amp; event planning for clients who expect precision, creativity, and flawless execution.</p>
+    <p class="hero-meta">Founded 2017 <span>&middot;</span> Bowie, Maryland <span>&middot;</span> Corporate <span>&middot;</span> Government <span>&middot;</span> Private Events</p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">Plan Your Event</a>
       <a href="#services" class="btn-ghost">Our Services</a>
@@ -846,10 +253,11 @@
 <section class="about" id="about">
   <div class="about-visual reveal">
     <div class="about-frame">
-      <div class="monogram">KEP</div>
+      <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&auto=format&fit=crop&q=85" alt="Elegant event setting" />
+      <div class="about-frame-overlay"></div>
       <div class="about-frame-inner">
         <div class="about-frame-badge">Established</div>
-        <div class="about-frame-year">Bowie, MD — 2017</div>
+        <div class="about-frame-year">Bowie, MD &mdash; 2017</div>
       </div>
       <div class="about-corner tl"></div>
       <div class="about-corner br"></div>
@@ -858,24 +266,10 @@
   <div class="about-content">
     <div class="section-label reveal"><span>Our Story</span></div>
     <h2 class="section-heading reveal">Built on Expertise,<br>Driven by <em>Excellence</em></h2>
-    <div style="margin-top: 2rem;">
-      <p class="reveal reveal-delay-1">Founded in 2017, KEP Event Planning is a full-service catering and event planning firm serving clients throughout the Washington metropolitan area. We specialize in delivering seamless, high-impact events for corporate, government, association, and private clients.</p>
-      <p class="reveal reveal-delay-2">At the helm is a seasoned hospitality executive with more than 15 years of progressive leadership experience — combining strategic planning expertise with a deep understanding of client service, compliance, and operational excellence.</p>
-      <p class="reveal reveal-delay-3">Our leadership background includes directing multi-million-dollar catering operations with nationally recognized organizations including Aramark and Levy, exceeding quarterly sales goals and building long-term client relationships that drive repeat and referral business.</p>
-    </div>
-    <div class="about-stats reveal">
-      <div class="stat">
-        <span class="stat-number">15+</span>
-        <span class="stat-label">Years Experience</span>
-      </div>
-      <div class="stat">
-        <span class="stat-number">$MM</span>
-        <span class="stat-label">Operations Led</span>
-      </div>
-      <div class="stat">
-        <span class="stat-number">4</span>
-        <span class="stat-label">Certifications</span>
-      </div>
+    <div style="margin-top:2rem;">
+      <p class="reveal reveal-delay-1">Founded in 2017 in Bowie, KEP Event Planning is a full-service catering and event planning firm serving clients throughout the Washington metropolitan area. We specialize in delivering seamless, high-impact events for corporate, government, association, and private clients who expect precision, creativity, and flawless execution.</p>
+      <p class="reveal reveal-delay-2">At the helm is a seasoned hospitality executive with more than 15 years of progressive leadership experience in catering, event sales, and large-scale operations. Our leadership combines strategic planning expertise with a deep understanding of client service, compliance, and operational excellence.</p>
+      <p class="reveal reveal-delay-3">Our background includes directing multi-million-dollar catering operations with nationally recognized organizations including Aramark and Levy &mdash; exceeding quarterly sales goals, increasing beverage revenues by double digits, and building long-term client relationships that drive repeat and referral business.</p>
     </div>
   </div>
 </section>
@@ -889,94 +283,129 @@
       <div class="section-label reveal"><span>What We Do</span></div>
       <h2 class="section-heading reveal">Comprehensive Event<br><em>Management Services</em></h2>
     </div>
-    <p style="max-width:340px; font-size:0.82rem; color:var(--muted); line-height:1.8; font-weight:300;" class="reveal">Every event is approached with strategic intention — from forecasting and pricing to execution and post-event analysis.</p>
+    <p class="services-header-desc reveal">Every event is approached with strategic intention &mdash; from forecasting and pricing to execution and post-event analysis. We develop detailed Banquet Event Orders, manage all operational logistics, and collaborate closely with culinary teams to design innovative menus.</p>
   </div>
   <div class="services-grid">
     <div class="service-card reveal">
       <div class="service-number">01</div>
-      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/><path d="M18.5 10.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S17 8.17 17 9s.67 1.5 1.5 1.5zM5.5 10.5c.83 0 1.5-.67 1.5-1.5S6.33 7.5 5.5 7.5 4 8.17 4 9s.67 1.5 1.5 1.5z"/></svg></div>
-      <h3 class="service-title">Catering & Menu Development</h3>
-      <p class="service-desc">Full-scale catering services with innovative menu design crafted in collaboration with culinary teams, tailored to your event vision and guest experience.</p>
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div>
+      <h3 class="service-title">Catering &amp; Menu Development</h3>
+      <p class="service-desc">Full-scale catering services with innovative menu design crafted in close collaboration with culinary teams &mdash; tailored to your event vision, dietary needs, and guest experience goals.</p>
     </div>
     <div class="service-card reveal reveal-delay-1">
       <div class="service-number">02</div>
       <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-      <h3 class="service-title">Corporate & Government Events</h3>
-      <p class="service-desc">Corporate galas, government functions, association conferences — delivered with the precision and compliance standards that institutional clients demand.</p>
+      <h3 class="service-title">Corporate &amp; Government Events</h3>
+      <p class="service-desc">Corporate galas, government functions, and association conferences &mdash; delivered with the precision, professionalism, and compliance standards that institutional clients demand.</p>
     </div>
     <div class="service-card reveal reveal-delay-2">
       <div class="service-number">03</div>
       <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-      <h3 class="service-title">Weddings & Private Events</h3>
-      <p class="service-desc">Intimate dinners to grand celebrations — every private event receives the same meticulous attention to detail, creativity, and seamless execution.</p>
+      <h3 class="service-title">Weddings &amp; Private Social Events</h3>
+      <p class="service-desc">From intimate private dinners to grand celebrations &mdash; every event receives the same meticulous attention to detail, boundless creativity, and seamless end-to-end execution.</p>
     </div>
     <div class="service-card reveal">
       <div class="service-number">04</div>
       <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h3 class="service-title">Contract & Budget Management</h3>
-      <p class="service-desc">Expert contract negotiation, detailed Banquet Event Orders (BEOs), precise budget management and financial forecasting for every engagement.</p>
+      <h3 class="service-title">Contract &amp; Budget Management</h3>
+      <p class="service-desc">Expert contract negotiation, detailed Banquet Event Orders (BEOs), precise budget management, financial forecasting, and post-event analysis for every engagement.</p>
     </div>
     <div class="service-card reveal reveal-delay-1">
       <div class="service-number">05</div>
       <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-      <h3 class="service-title">Logistics & Vendor Coordination</h3>
-      <p class="service-desc">End-to-end operational logistics including audiovisual, transportation, staffing coordination, and full vendor management for seamless execution.</p>
+      <h3 class="service-title">Logistics &amp; Vendor Coordination</h3>
+      <p class="service-desc">End-to-end operational logistics including audiovisual, transportation, staffing coordination, and full vendor management &mdash; ensuring every moving part arrives on time and on brief.</p>
     </div>
     <div class="service-card reveal reveal-delay-2">
       <div class="service-number">06</div>
       <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg></div>
-      <h3 class="service-title">Bar & Beverage Programs</h3>
-      <p class="service-desc">Comprehensive bar program management including beverage menu design, inventory management, and responsible alcohol service compliance.</p>
+      <h3 class="service-title">Bar &amp; Beverage Programs</h3>
+      <p class="service-desc">Comprehensive bar program management including beverage menu design, inventory oversight, staffing, and responsible alcohol service compliance from a licensed ABC Manager.</p>
     </div>
   </div>
 </section>
 
 <div class="gold-divider"></div>
 
-<!-- BARTENDER SECTION -->
+<!-- PHOTO STRIP -->
+<div class="photo-strip">
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=700&auto=format&fit=crop&q=80" alt="Corporate gala" />
+    <div class="photo-strip-overlay"></div>
+    <div class="photo-strip-label">Corporate Galas</div>
+  </div>
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&auto=format&fit=crop&q=80" alt="Wedding reception" />
+    <div class="photo-strip-overlay"></div>
+    <div class="photo-strip-label">Weddings</div>
+  </div>
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=700&auto=format&fit=crop&q=80" alt="Catering spread" />
+    <div class="photo-strip-overlay"></div>
+    <div class="photo-strip-label">Premium Catering</div>
+  </div>
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&auto=format&fit=crop&q=80" alt="Conference event" />
+    <div class="photo-strip-overlay"></div>
+    <div class="photo-strip-label">Conferences</div>
+  </div>
+</div>
+
+<div class="gold-divider"></div>
+
+<!-- BARTENDING -->
 <section class="bartender" id="bartending">
   <div class="bartender-inner">
+
+    <!-- LEFT: Photo -->
     <div class="bartender-visual">
-      <div class="bartender-bg-pattern"></div>
-      <div class="glass-glow"></div>
-      <div class="glass-art" style="position:relative;z-index:2;">
-        <svg viewBox="0 0 180 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Cocktail glass -->
-          <path d="M40 30 L90 110 L140 30 Z" stroke="#B8965A" stroke-width="1.5" fill="rgba(184,150,90,0.05)"/>
-          <line x1="90" y1="110" x2="90" y2="180" stroke="#B8965A" stroke-width="1.5"/>
-          <line x1="60" y1="180" x2="120" y2="180" stroke="#B8965A" stroke-width="1.5"/>
-          <!-- Liquid fill -->
-          <path d="M55 65 L90 110 L125 65 Z" fill="rgba(184,150,90,0.15)" stroke="none"/>
-          <!-- Garnish -->
-          <circle cx="130" cy="40" r="8" stroke="#B8965A" stroke-width="1" fill="rgba(184,150,90,0.1)"/>
-          <line x1="130" y1="30" x2="130" y2="48" stroke="#B8965A" stroke-width="1"/>
-          <!-- Stars -->
-          <circle cx="30" cy="50" r="1.5" fill="#B8965A" opacity="0.4"/>
-          <circle cx="155" cy="80" r="1" fill="#B8965A" opacity="0.3"/>
-          <circle cx="20" cy="130" r="1" fill="#B8965A" opacity="0.3"/>
-          <circle cx="165" cy="40" r="1.5" fill="#B8965A" opacity="0.4"/>
-        </svg>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(184,150,90,0.5);margin-top:1rem;">Premium Service</div>
+      <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=1000&auto=format&fit=crop&q=85" alt="Professional bartender at work" />
+      <div class="bartender-vis-overlay"></div>
+      <div class="bartender-caption">
+        <div class="eyebrow">Premium Bar Service</div>
+        <div class="tagline">Every Pour,<br><em>Perfected</em></div>
       </div>
     </div>
+
+    <!-- RIGHT: Content -->
     <div class="bartender-content">
       <div class="section-label reveal"><span>Bartending Services</span></div>
       <h2 class="section-heading reveal">Elevate Your Event with<br><em>Professional Bartending</em></h2>
+
       <p class="reveal" style="margin-top:1.5rem;">From weddings and corporate events to galas and private celebrations, our certified bartenders bring professionalism, personality, and precision to every pour.</p>
+
       <div class="venues-note reveal">
-        Experience serving at Nationals Park and Capital One Arena — we know how to deliver seamless bar service for events of any size.
+        With extensive experience serving at premier venues like Nationals Park and Capital One Arena, we understand what it takes to deliver seamless, high-volume bar service for events of any size.
       </div>
-      <div class="cert-list reveal">
-        <div class="cert-item">Alcohol Beverage Control Licensed</div>
-        <div class="cert-item">ServSafe & Responsible Alcohol Certified</div>
-        <div class="cert-item">Skilled in High-Volume & Luxury Service</div>
-        <div class="cert-item">Professional, Polished & Guest-Focused</div>
+
+      <div class="reveal">
+        <p class="list-heading">Proudly Partnered With Leading D.C. Caterers</p>
+        <div class="diamond-list">
+          <div class="diamond-item">RSVP Catering</div>
+          <div class="diamond-item">Federal City Caterers</div>
+          <div class="diamond-item">Hospitality Staffing</div>
+          <div class="diamond-item">Susan Gage Caterers</div>
+          <div class="diamond-item">Sinplicity Catering</div>
+          <div class="diamond-item">Capital Restaurant Resources</div>
+        </div>
       </div>
-      <div style="margin-top:1rem;" class="reveal">
-        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:rgba(245,236,215,0.5);margin-bottom:2rem;">Great drinks. Exceptional service. Unforgettable experience.</p>
-        <a href="#contact" class="btn-primary">Book Our Bartenders</a>
+
+      <p class="bartender-closing reveal">From corporate galas and sporting events to private celebrations and large-scale productions, our team brings professionalism, efficiency, and polished service to every bar we run.</p>
+
+      <div class="reveal">
+        <p class="list-heading">Certifications &amp; Credentials</p>
+        <div class="diamond-list">
+          <div class="diamond-item">Alcohol Beverage Control Licensed</div>
+          <div class="diamond-item">ServSafe &amp; Responsible Alcohol Certified</div>
+          <div class="diamond-item">Skilled in High-Volume &amp; Luxury Service</div>
+          <div class="diamond-item">Professional, Polished &amp; Guest-Focused</div>
+        </div>
       </div>
+
+      <p class="italic-tagline reveal">Great drinks. Exceptional service. Unforgettable experience.</p>
+      <div class="reveal"><a href="#contact" class="btn-primary">Book Our Bartenders</a></div>
     </div>
+
   </div>
 </section>
 
@@ -985,13 +414,12 @@
 <!-- CREDENTIALS -->
 <section class="credentials" id="credentials">
   <div class="section-label reveal" style="justify-content:center;"><span>Certified Excellence</span></div>
-  <h2 class="section-heading reveal">Licensed, Certified &<br><em>Committed to Excellence</em></h2>
-  <p class="credentials-intro reveal">Our team is trained in hospitality excellence, food safety compliance, and responsible alcohol service — ensuring every event is both exceptional and secure.</p>
-
+  <h2 class="section-heading reveal">Licensed, Certified &amp;<br><em>Committed to Excellence</em></h2>
+  <p class="credentials-intro reveal">KEP Event Planning maintains the highest professional standards. Our team is trained in hospitality excellence, food safety compliance, and responsible alcohol service &mdash; ensuring every event is both exceptional and secure.</p>
   <div class="creds-grid">
     <div class="cred-card reveal">
       <div class="cred-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div class="cred-name">Alcohol Beverage Control Manager's License</div>
+      <div class="cred-name">Alcohol Beverage Control Manager&rsquo;s License</div>
     </div>
     <div class="cred-card reveal reveal-delay-1">
       <div class="cred-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
@@ -1006,23 +434,11 @@
       <div class="cred-name">Allen Train Certification</div>
     </div>
   </div>
-
-  <div class="section-label reveal" style="justify-content:center;margin-bottom:1.5rem;"><span>Education</span></div>
-  <div class="edu-section">
-    <div class="edu-card reveal">
-      <div class="edu-degree">Master of Arts — Legal Administration</div>
-      <div class="edu-school">Marymount University</div>
-    </div>
-    <div class="edu-card reveal reveal-delay-1">
-      <div class="edu-degree">Bachelor of Arts — Human Development</div>
-      <div class="edu-school">St. Mary's College of Maryland</div>
-    </div>
-  </div>
 </section>
 
 <div class="gold-divider"></div>
 
-<!-- PARTNERS -->
+<!-- LEGACY PARTNERS -->
 <section class="partners">
   <p class="partners-label">Leadership Experience With</p>
   <div class="partners-row">
@@ -1035,10 +451,12 @@
 
 <div class="gold-divider"></div>
 
-<!-- CTA -->
+<!-- CTA / CONTACT -->
 <section class="cta-section" id="contact">
+  <div class="cta-overlay"></div>
+  <div class="cta-glow"></div>
   <h2 class="cta-large reveal">Ready to Create Something<br><em>Unforgettable?</em></h2>
-  <p class="cta-sub reveal">Professionalism. Precision. Purpose. — Washington Metropolitan Area</p>
+  <p class="cta-sub reveal">Professionalism. Precision. Purpose. &mdash; Washington Metropolitan Area</p>
   <div class="cta-actions reveal">
     <a href="mailto:info@kepeventplanning.com" class="btn-primary">Get in Touch</a>
     <a href="#services" class="btn-ghost">Explore Services</a>
@@ -1062,28 +480,19 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">KEP Event Planning</div>
-  <p class="footer-tagline">"Deliver unforgettable experiences with professionalism, precision, and purpose."</p>
-  <p class="footer-copy">© 2025 KEP Event Planning · Bowie, Maryland · All Rights Reserved</p>
+  <p class="footer-tagline">&ldquo;Deliver unforgettable experiences with professionalism, precision, and purpose.&rdquo;</p>
+  <p class="footer-copy">&copy; 2025 KEP Event Planning &middot; Bowie, Maryland &middot; All Rights Reserved</p>
 </footer>
 
 <script>
-  // Nav scroll effect
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 60) navbar.classList.add('scrolled');
-    else navbar.classList.remove('scrolled');
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
   });
-
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
